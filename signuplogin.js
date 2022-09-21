@@ -2,7 +2,8 @@ let bcrypt = require('bcrypt');
 let User = require('../models/user');
 
 
-
+let jwt = require('jsonwebtoken');
+let akshat = '8a3d090cfe35e729666070cdbe5a96e433ba8f9ab9eff2b78c3198de7cdb6a63f0eba48d6049b8fc1076b8885e11a61a0e31628cb7319bf3ed379ac8e9bf1e0b';
 
 exports.postuserdata = async (req, res) => {
     let { name, email, phonenumber, pwd } = req.body;
@@ -65,7 +66,8 @@ exports.postlogin = async (req, res) => {
   
   
       if (emailpwdmatch) {
-        res.status(200).json({ msg: "login successful" });
+        const token = jwt.sign(dbid, 'akshat1234567890');
+        res.status(200).json({ msg: "login successful", token: token });
       } else {
         res.status(401).json({ msg: "something went wrong" });
       }

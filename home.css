@@ -1,0 +1,317 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  
+  #nav {
+    background-color: cornflowerblue;
+    padding: 9px;
+    display: flex;
+    width: 100%;
+  
+  }
+  
+  #user {
+    display: flex;
+  
+  }
+  
+  #userwelcome {
+    margin-left: 56vw;
+    color: cornflowerblue;
+    letter-spacing: 2px;
+  }
+  
+  .userdetail {
+    margin-left: 1%;
+    color: white;
+  }
+  
+  .wel {
+    color: rgb(247, 249, 249);
+    margin-left: 10px;
+    text-align: center;
+    margin-left: 120px;
+  }
+  
+  #regform {
+  
+    margin-top: 80px;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    background-color: cornflowerblue;
+    margin-top: 60px;
+  
+  }
+  
+  .fa-caret-down {
+    color: white;
+    margin-left: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  
+  #dropshow {
+  
+    color: white;
+    margin-left: 2%;
+    cursor: pointer;
+  
+  }
+  
+  #buysub {
+    border: 4px solid blue;
+    position: absolute;
+    transition-duration: 0.4s;
+    display: flex;
+  
+    color: white;
+    background-color: cornflowerblue;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .container {
+    margin: 10px 100px;
+    padding: 20px 150px;
+    border: 2px solid rgb(80, 92, 61);
+    border-radius: 10px;
+    background-color: lightblue;
+    width: 86%;
+  }
+  
+  .adex {
+    text-align: center;
+    margin-bottom: 20px;
+    /* margin-left: 4%; */
+    color: black;
+    color: darkblue;
+    font-size: 30px;
+  }
+  
+  #category {
+    font-weight: 550;
+    margin-inline: 15px;
+    width: 15%;
+    border: none;
+    outline: none;
+    padding: 5px;
+  }
+  
+  #description {
+    font-weight: 300;
+  
+    margin-inline: 0px;
+    /* border: none; */
+    border: darkblue;
+    outline: none;
+    padding: 3px;
+    width: 12vw;
+  }
+  
+  #amount {
+    font-weight: 550;
+    margin-inline: 30px;
+    width: 17%;
+    border: none;
+    outline: none;
+    padding: 5px;
+  
+  
+  }
+  
+  #addexpensebtn {
+    border: none;
+    background-color: darkblue;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    margin-left: 900px;
+    margin-top: 10px;
+  }
+  
+  option:hover {
+    background-color: blue;
+    color: white;
+  }
+  
+  #expensebox {
+    width: 50%;
+    margin: auto;
+    margin-top: 80px;
+    background-color: cornflowerblue;
+    padding: 20px;
+  }
+  
+  .singleexpense {
+    width: 90%;
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    margin-top: 4px;
+  }
+  
+  .exphead {
+  
+    width: 90%;
+    background-color: rgb(158, 192, 231);
+    margin: auto;
+    border: 5px solid blue;
+    padding: 10px;
+    margin-top: 4px;
+  
+  }
+  /* .expensedetails{
+    width: 90%;
+    background-color: rgb(158, 192, 231);
+    margin: auto;
+    border: 5px solid blue;
+    padding: 10px;
+    margin-top: 4px;
+  } */
+  .exphead1 {
+    margin-right: 8vw;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .exphead2 {
+    margin-right: 8vw;
+  
+    font-size: 20px;
+    font-weight: 500;
+  
+  }
+  
+  .exphead3 {
+  
+    font-size: 20px;
+    font-weight: 500;
+  
+  
+  }
+  
+  #alertpopup {
+    position: fixed;
+    top: 45px;
+    right: 50%;
+  }
+  
+  .notification {
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    color: white;
+    padding: 0.7rem;
+    margin: 1rem;
+  }
+  
+  .ifempty {
+    position: fixed;
+    top: 45px;
+    right: 50%;
+  }
+  
+  .alertempty {
+    background-color: blue;
+    border-radius: 5px;
+    color: white;
+    padding: 0.7rem;
+    margin: 1rem;
+  }
+  
+  .gprice {
+  
+    margin-right: 10vw;
+    font-size: 20px;
+    font-weight: 500;
+  
+  }
+  
+  .gcategory {
+    margin-right: 8vw;
+  
+    font-size: 20px;
+    font-weight: 500;
+  
+  
+  }
+  
+  .gdescription {
+    font-size: 20px;
+    font-weight: 500;
+  
+  }
+  
+  .droplist {
+    list-style: none;
+  
+  }
+  
+  .droplist li {
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .droplist li a {
+    text-decoration: none;
+    /* color: white; */
+    font-weight: 500;
+  }
+  
+  .dropoptions {
+    /* background-color: blue; */
+    border: 1.5px solid blue;
+    width: 12vw;
+    padding: 0px;
+    float: right;
+    margin-right: 10px;
+    display: none;
+  
+  
+  }
+  
+  
+  
+  
+  @media screen and (max-width: 480px) {
+  
+    #regform {
+      width: 85%;
+      display: grid;
+      place-items: center;
+  
+    }
+  
+    .adex {
+      margin-bottom: 40px;
+    }
+  
+    #category {
+      width: 95%;
+      margin-bottom: 13px;
+    }
+  
+    #description {
+      width: 95%;
+      margin-bottom: 23px;
+  
+    }
+  
+    #amount {
+      width: 95%;
+      margin-bottom: 13px;
+  
+    }
+  }
+  
+  
+  .prmbtm {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 1%;
+    left: 50%;
+  }
