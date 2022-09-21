@@ -23,7 +23,7 @@ btnsubmit.addEventListener('click', (e) => {
 
             if (res.status === 200) {
                 alert('login successful')
-    
+                window.location.replace('home.html');
             }
         }
         catch (err) {
