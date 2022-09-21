@@ -2,7 +2,7 @@ let express=require('express');
 
 let bodyParser=require('body-parser');
 
-
+let bcrypt=require('bcrypt');
 let cors=require('cors');
 const sequelize = require("./models/database");
 
