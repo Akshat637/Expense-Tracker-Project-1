@@ -9,6 +9,7 @@ const router = express.Router();
 let bodyParser = require("body-parser");
 const Razorpay = require("razorpay");
 const Order = require("../models/order");
+const { Op } = require('sequelize')
 
 let c = 0;
 router.use(bodyParser.json());
@@ -108,34 +109,32 @@ router.post("/updatetransaction", aut.authenticate, async (req, res) => {
 });
 
 
-
-router.get("/leaderdata", aut.authenticate, async (req, res) => {
-  const totalAmount = await Expense.findAll({
-    attributes: [
-      "userId",
-      [Sequelize.fn("sum", Sequelize.col("amount")), "total_amount"],
-    ],
-    group: ["userId"],
-    raw: true,
-  });
-
-  totalAmount.sort((a, b) => b.total_amount - a.total_amount);
-
-  for (let i = 0; i < totalAmount.length; i++) {
-    let user = await User.findAll({
-      attributes: ["name"],
-      where: { id: totalAmount[i].userId },
+ router.get("/leaderdata", aut.authenticate, async (req, res) => {
+    const totalAmount = await Expense.findAll({
+      attributes: [
+        "userId",
+        [Sequelize.fn("sum", Sequelize.col("amount")), "total_amount"],
+      ],
+      group: ["userId"],
+      raw: true,
     });
-
-    //console.log(user[0].name)
-
-    totalAmount[i] = { ...totalAmount[i], name: user[0].name };
-  }
-
-  //console.log(totalAmount)
-  res.json( totalAmount);
-});
-
+  
+    totalAmount.sort((a, b) => b.total_amount - a.total_amount);
+  
+    for (let i = 0; i < totalAmount.length; i++) {
+      let user = await User.findAll({
+        attributes: ["name"],
+        where: { id: totalAmount[i].userId },
+      });
+  
+      //console.log(user[0].name)
+  
+      totalAmount[i] = { ...totalAmount[i], name: user[0].name };
+    }
+  
+    //console.log(totalAmount)
+    res.json( totalAmount);
+  });
 
 
 
@@ -150,7 +149,50 @@ router.delete('/delete/expense/:id', aut.authenticate, (req, res) => {
     })
 });
 
-// yha s
+
+router.get('/daily/expenses',aut.authenticate,async (req,res)=>{
+
+  const today = new Date().setHours(0, 0, 0, 0);
+  const now = new Date();
+
+  req.user
+    .getExpenses({
+      where: {
+        createdAt: {
+          [Op.gt]: today,
+          [Op.lt]: now,
+        },
+      },
+    })
+    .then((result) => {
+      res.json(result);
+    });
+
+
+});
+
+
+
+
+
+router.get('/weekly/expenses',aut.authenticate,async(req,res)=>{
+  const todayDate = new Date().getDate();
+  const lastWeek = new Date().setDate(todayDate - 7);
+  const now = new Date();
+
+  req.user
+    .getExpenses({
+      where: {
+        createdAt: {
+          [Op.gt]: lastWeek,
+          [Op.lt]: now,
+        },
+      },
+    })
+    .then((result) => {
+      res.json(result);
+    });
+});
 
 
 module.exports = router;
