@@ -8,6 +8,7 @@ const sequelize = require("./models/database");
 
 const User=require('./models/user');
 const Expense=require('./models/expense');
+const Order=require('./models/order');
 
 let app = express();
 
@@ -20,6 +21,8 @@ let homerouter=require('./routes/home');
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
+User.hasMany(Order);
+Order.belongsTo(User);
 
 app.use(SignUpLogin);
 app.use(homerouter)

@@ -1,20 +1,17 @@
 let dropoptions = document.querySelector(".dropoptions");
 let droper = document.querySelector('#droper');
-let addexpensebtn = document.querySelector("#addexpensebtn");
 let amount1 = document.querySelector('#amount');
 let category1 = document.querySelector("#category");
 let description1 = document.querySelector('#description');
 let userdeatail = document.querySelector('.userdetail');
-let expensedetails = document.querySelector(".expensedetails");
 let alertpopup = document.querySelector("#alertpopup");
-let ifempty = document.querySelector('.ifempty');
-let logout = document.querySelector('#logout');
-let dropshow = document.querySelector('#dropshow');
-let subscriptionbtn = document.querySelector('#buysub');
-let hidedrop = document.querySelector("#hidedrop");
 let body = document.querySelector("body");
 let subfeature = document.querySelector(".subfeatures");
 let whitetheme = document.querySelector('#whitetheme');
+
+
+
+let addexpensebtn = document.querySelector("#addexpensebtn");
 addexpensebtn.addEventListener('click', (e) => {
   let token = localStorage.getItem("token");
 
@@ -115,7 +112,7 @@ function AlertItem(e) {
 }
 
 
-
+let logout = document.querySelector('#logout');
 logout.addEventListener('click', () => {
 
   let result = confirm("Are You Sure !");
@@ -126,17 +123,106 @@ logout.addEventListener('click', () => {
 
 });
 
-
+let dropshow = document.querySelector('#dropshow');
 dropshow.addEventListener('click', (e) => {
   dropoptions.style.display = 'block';
 });
+
+let hidedrop = document.querySelector("#hidedrop");
 hidedrop.addEventListener("click", () => {
   dropoptions.style.display = "none";
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  let token = localStorage.getItem("token");
+
+  axios
+    .get("http://localhost:8400/getuserdata", {
+      headers: { authorization: token },
+    })
+    .then((result) => {
+      if (result.data.result[0].issubcribed == true) {
+        subfeature.innerHTML = `
+     <li class="text-dark" id="subscriptiontheme" >Change Theme</li>
+                  <li><a href="board.html" id="leaderboard">See Leaderboard</a></li>
+             <li><a href="report.html" id="report">Get Expense Report</a></li>`;
+
+        let subscriptiontheme = document.querySelector("#subscriptiontheme");
+        let leaderboard = document.querySelector("#leaderboard");
+        let report = document.querySelector("#report");
+
+        subscriptiontheme.addEventListener("click", () => {
+          body.style.backgroundColor = 'blue';
+        });
+
+      }
+    })
+    .then((err) => {
+      console.log(err);
+    });
+});
+let subscriptionbtn = document.querySelector('#buysub');
+subscriptionbtn.addEventListener('click', buySubscription);
+
+async function buySubscription(e) {
+  let token = localStorage.getItem("token");
+
+  e.preventDefault();
+  const response = await axios.get("http://localhost:8400/subscription", {
+    headers: { authorization: token },
+  });
+  console.log(response);
+  var options = {
+    key: response.data.key_id, // Enter the Key ID generated from the Dashboard
+    name: "Akshat",
+    order_id: response.data.order.id, // For one time payment
+    prefill: {
+      name: "Akshat",
+      email: "ak@examgmail.com",
+      contact: "6377928937",
+    },
+    theme: {
+      color: "#528FF0",
+    },
+    // This handler function will handle the success payment
+    handler: function (response) {
+      console.log(response);
+      axios
+        .post(
+          "http://localhost:8400/updatetransaction",
+          {
+            order_id: options.order_id,
+            payment_id: response.razorpay_payment_id,
+          },
+          { headers: { authorization: token } }
+        )
+        .then(() => {
+          alert("You are a Premium User Now");
+        })
+        .catch(() => {
+          alert("Something went wrong. Try Again!!!");
+        });
+    },
+  };
 
 
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+  e.preventDefault();
 
+  rzp1.on('payment.failed', function (response) {
+    alert("payment failed");
+    alert(response.error.description);
+    alert(response.error.source);
+    alert(response.error.step);
+    alert(response.error.reason);
+    alert(response.error.metadata.order_id);
+    alert(response.error.metadata.payment_id);
+  });
+
+}
+
+let expensedetails = document.querySelector(".expensedetails");
 expensedetails.addEventListener('click', (e) => {
   let token = localStorage.getItem('token');
 
