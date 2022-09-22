@@ -1,0 +1,14 @@
+
+.mainbar{
+    background-color: cornflowerblue;
+    display: flex;
+    padding: 10px;
+}
+#home{
+    color: white;
+    text-decoration: none;
+    margin-left: 40%;
+}
+.maincon{
+    width: 1170%;
+}
